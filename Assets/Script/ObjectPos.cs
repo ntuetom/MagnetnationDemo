@@ -21,11 +21,9 @@ public class ObjectPos : MonoBehaviour {
 		
 		
 	    	guiText.text = (
-                Magmusic.StartCompass.x.ToString("f1") + " , " +
-                Magmusic.StartCompass.y.ToString("f1") + " , " +
-                Magmusic.StartCompass.z.ToString("f1"));
-		   
-		
-		
-	}
+                Magmusic.deltaCompass.x.ToString("f1") + " , " +
+                Magmusic.deltaCompass.y.ToString("f1") + " , " +
+                Magmusic.deltaCompass.z.ToString("f1") 
+                );
+	        }
 }

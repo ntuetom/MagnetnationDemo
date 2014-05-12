@@ -29,8 +29,8 @@ public class Magmusic : MonoBehaviour {
 
 			ChageCompass = Input.compass.rawVector;
 
-						//當下-初始的磁感應的變化量來判斷位置
-
+						
+            //elephant
             if ((ChageCompass.x - OneCompass.x) < -90 && (ChageCompass.y - OneCompass.y)<-30)
             {
                         if (!audio.isPlaying)
@@ -38,12 +38,12 @@ public class Magmusic : MonoBehaviour {
                             audio.clip = aud[0];
                             audio.Play();
                         }
-						transform.position=new Vector3(30,28,0);
+						transform.position=new Vector3(80,-20,0);
 							
 				
 			}
 
-
+            //tiger
             else if ((ChageCompass.x - OneCompass.x) < -100 && (ChageCompass.y - OneCompass.y) < -40)
             {
 
@@ -52,9 +52,11 @@ public class Magmusic : MonoBehaviour {
                     audio.clip = aud[1];
                     audio.Play();
                 }
-                transform.position = new Vector3(-3, 60, 0);
+                transform.position = new Vector3(20, 70, 0);
 
             }
+
+            //turtle
             else if ((ChageCompass.z - OneCompass.z) > 220 && (ChageCompass.y - OneCompass.y) < -60)
             {
                 if (!audio.isPlaying)
@@ -62,7 +64,33 @@ public class Magmusic : MonoBehaviour {
                     audio.clip = aud[2];
                     audio.Play();
                 }
-                transform.position = new Vector3(-36, 28, 0);
+                transform.position = new Vector3(0, 50, 0);
+
+
+            }
+
+            //giraffe
+            else if ((ChageCompass.z - OneCompass.z) > 220 && (ChageCompass.y - OneCompass.y) < -60)
+            {
+                if (!audio.isPlaying)
+                {
+                    audio.clip = aud[2];
+                    audio.Play();
+                }
+                transform.position = new Vector3(-10, 20, 0);
+
+
+            }
+
+            //flamingo
+            else if ((ChageCompass.z - OneCompass.z) > 220 && (ChageCompass.y - OneCompass.y) < -60)
+            {
+                if (!audio.isPlaying)
+                {
+                    audio.clip = aud[2];
+                    audio.Play();
+                }
+                transform.position = new Vector3(15, 30, 0);
 
 
             }
@@ -72,7 +100,7 @@ public class Magmusic : MonoBehaviour {
             {
 
                 audio.Stop();
-				transform.position=new Vector3(0,0,0);
+				transform.position=new Vector3(-30,55,0);
 				
 			}
 			

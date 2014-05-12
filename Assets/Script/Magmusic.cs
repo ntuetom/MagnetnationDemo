@@ -18,7 +18,7 @@ public class Magmusic : MonoBehaviour {
 		//取得電子羅盤裝置, 才能偵測磁感應
 		Input.location.Start();
 		Input.compass.enabled = true;
-        OneCompass = Input.compass.rawVector;
+        OneCompass = new Vector3(8,-2,-20);
         startgo = true;
 	}
 	// Update is called once per frame
@@ -28,36 +28,25 @@ public class Magmusic : MonoBehaviour {
 
 
 			ChageCompass = Input.compass.rawVector;
-
+            deltaCompass = ChageCompass - OneCompass;
 						
             //elephant
-            if ((ChageCompass.x - OneCompass.x) < -90 && (ChageCompass.y - OneCompass.y)<-30)
+            if ((ChageCompass.x - OneCompass.x) < 0 && (ChageCompass.x - OneCompass.x) > -20 &&
+                (ChageCompass.y - OneCompass.y) > -50 && (ChageCompass.y - OneCompass.y) < -20)
             {
                         if (!audio.isPlaying)
                         {
                             audio.clip = aud[0];
                             audio.Play();
                         }
-						transform.position=new Vector3(80,-20,0);
+						transform.position=new Vector3(-20,80,0);
 							
 				
 			}
-
-            //tiger
-            else if ((ChageCompass.x - OneCompass.x) < -100 && (ChageCompass.y - OneCompass.y) < -40)
-            {
-
-                if (!audio.isPlaying)
-                {
-                    audio.clip = aud[1];
-                    audio.Play();
-                }
-                transform.position = new Vector3(20, 70, 0);
-
-            }
-
+           
             //turtle
-            else if ((ChageCompass.z - OneCompass.z) > 220 && (ChageCompass.y - OneCompass.y) < -60)
+            else if ((ChageCompass.x - OneCompass.x) > -10 && (ChageCompass.x - OneCompass.x) < 0 &&
+                      (ChageCompass.y - OneCompass.y) > -25 && (ChageCompass.y - OneCompass.y) < -10)
             {
                 if (!audio.isPlaying)
                 {
@@ -68,9 +57,10 @@ public class Magmusic : MonoBehaviour {
 
 
             }
-
+           
             //giraffe
-            else if ((ChageCompass.z - OneCompass.z) > 220 && (ChageCompass.y - OneCompass.y) < -60)
+            else if ((ChageCompass.x - OneCompass.x) < -50 && (ChageCompass.x - OneCompass.x) > -70 &&
+                (ChageCompass.y - OneCompass.y) > 10 && (ChageCompass.y - OneCompass.y) < 20)
             {
                 if (!audio.isPlaying)
                 {
@@ -81,9 +71,26 @@ public class Magmusic : MonoBehaviour {
 
 
             }
+            
+             //tiger
+            else if ((ChageCompass.x - OneCompass.x) > -5 && (ChageCompass.y - OneCompass.y) < 5 &&
+                       (ChageCompass.y - OneCompass.y) > -25 && (ChageCompass.y - OneCompass.y) < -15 &&
+                        (ChageCompass.z - OneCompass.z) <= -28 && (ChageCompass.z - OneCompass.z) > -35)
+            {
 
+                if (!audio.isPlaying)
+                {
+                    audio.clip = aud[1];
+                    audio.Play();
+                }
+                transform.position = new Vector3(20, 70, 0);
+
+            }
+            
             //flamingo
-            else if ((ChageCompass.z - OneCompass.z) > 220 && (ChageCompass.y - OneCompass.y) < -60)
+            else if ((ChageCompass.x - OneCompass.x) > -10 && (ChageCompass.x - OneCompass.x) < 0 &&
+                     (ChageCompass.y - OneCompass.y) < -10 && (ChageCompass.y - OneCompass.y) > -18 &&
+                        (ChageCompass.z - OneCompass.z) < -20 && (ChageCompass.z - OneCompass.z) > -28)
             {
                 if (!audio.isPlaying)
                 {
@@ -95,12 +102,13 @@ public class Magmusic : MonoBehaviour {
 
             }
 
+            
             //歸零
-            if ((ChageCompass.x - OneCompass.x) < 10 && (ChageCompass.x - OneCompass.x) > -10)
+            else
             {
 
                 audio.Stop();
-				transform.position=new Vector3(-30,55,0);
+				transform.position=new Vector3(-30,8,0);
 				
 			}
 			
@@ -112,30 +120,19 @@ public class Magmusic : MonoBehaviour {
 	}
 	void OnGUI() {
 		
-		if (GUI.Button(new Rect(10, 10, 100, 120), "計算結果")){
-            deltaCompass = V3temp[1] - OneCompass;
-		}
+		
 
-        if (GUI.Button(new Rect(140, 10, 150, 120), "REC值1  " + V3temp[0]))
-        {
-            V3temp[0] = Input.compass.rawVector;
-        }
 
-        if (GUI.Button(new Rect(300, 10, 150, 120), "REC值2  " + V3temp[1]))
-        {
-            V3temp[1] = Input.compass.rawVector; 
-        }
-
-        if (GUI.Button(new Rect(10, 140, 150, 120), "Reset  "+ OneCompass))
+        if (GUI.Button(new Rect(10, 10, 150, 120), "Reset  "+ OneCompass))
         {
             OneCompass = Input.compass.rawVector; 
         }
-        if (GUI.Button(new Rect(Screen.width / 10, Screen.height/3*2, 50, 50), "on"))
+        if (GUI.Button(new Rect(Screen.width / 3, Screen.height/10, 50, 50), "on"))
         {
             startgo = true;
             Input.compass.enabled = true;
         }
-        if (GUI.Button(new Rect(Screen.width / 3, Screen.height/3*2, 50, 50), "off"))
+        if (GUI.Button(new Rect(Screen.width / 3*2, Screen.height/10, 50, 50), "off"))
         {
             startgo = false;
             Input.compass.enabled = false;

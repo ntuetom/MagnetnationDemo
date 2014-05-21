@@ -6,12 +6,12 @@ public class Magmusic : MonoBehaviour {
 	public Vector3 ChageCompass;   //當下磁感應
 	public Vector3 OneCompass; 
 	bool startgo=false;
-	public AudioClip[]  aud=new AudioClip[3];
+    public AudioClip[] aud;
+    float felez,ftiger;
     Vector3[] V3temp;
 	// Use this for initialization
 	void Start () { 
 		// 取得預設 磁感應大小
-        V3temp = new Vector3[2];
         deltaCompass = Vector3.zero;
 	}
 	void OnEnable(){
@@ -32,7 +32,7 @@ public class Magmusic : MonoBehaviour {
 						
             //elephant
             if ((ChageCompass.x - OneCompass.x) < 0 && (ChageCompass.x - OneCompass.x) > -20 &&
-                (ChageCompass.y - OneCompass.y) > -50 && (ChageCompass.y - OneCompass.y) < -20)
+                (ChageCompass.y - OneCompass.y) > -50 && (ChageCompass.y - OneCompass.y) < -10)
             {
                         if (!audio.isPlaying)
                         {
@@ -40,13 +40,14 @@ public class Magmusic : MonoBehaviour {
                             audio.Play();
                         }
 						transform.position=new Vector3(-20,80,0);
-							
+                        felez = ChageCompass.z;
 				
 			}
            
             //turtle
             else if ((ChageCompass.x - OneCompass.x) > -10 && (ChageCompass.x - OneCompass.x) < 0 &&
-                      (ChageCompass.y - OneCompass.y) > -25 && (ChageCompass.y - OneCompass.y) < -10)
+                      (ChageCompass.y - OneCompass.y) > -20 && (ChageCompass.y - OneCompass.y) < -10 &&
+                        ChageCompass.z < felez)
             {
                 if (!audio.isPlaying)
                 {
@@ -59,12 +60,12 @@ public class Magmusic : MonoBehaviour {
             }
            
             //giraffe
-            else if ((ChageCompass.x - OneCompass.x) < -50 && (ChageCompass.x - OneCompass.x) > -70 &&
+            else if ((ChageCompass.x - OneCompass.x) < -40 && (ChageCompass.x - OneCompass.x) > -70 &&
                 (ChageCompass.y - OneCompass.y) > 10 && (ChageCompass.y - OneCompass.y) < 20)
             {
                 if (!audio.isPlaying)
                 {
-                    audio.clip = aud[2];
+                    audio.clip = aud[1];
                     audio.Play();
                 }
                 transform.position = new Vector3(-10, 20, 0);
@@ -73,28 +74,27 @@ public class Magmusic : MonoBehaviour {
             }
             
              //tiger
-            else if ((ChageCompass.x - OneCompass.x) > -5 && (ChageCompass.y - OneCompass.y) < 5 &&
-                       (ChageCompass.y - OneCompass.y) > -25 && (ChageCompass.y - OneCompass.y) < -15 &&
-                        (ChageCompass.z - OneCompass.z) <= -28 && (ChageCompass.z - OneCompass.z) > -35)
+            else if ((ChageCompass.x - OneCompass.x) > 0 && (ChageCompass.y - OneCompass.y) < 10 &&
+                       (ChageCompass.y - OneCompass.y) < 0 && (ChageCompass.y - OneCompass.y) > -10)
             {
 
                 if (!audio.isPlaying)
                 {
-                    audio.clip = aud[1];
+                    audio.clip = aud[3];
                     audio.Play();
                 }
                 transform.position = new Vector3(20, 70, 0);
-
+                ftiger = ChageCompass.z;
             }
             
             //flamingo
-            else if ((ChageCompass.x - OneCompass.x) > -10 && (ChageCompass.x - OneCompass.x) < 0 &&
-                     (ChageCompass.y - OneCompass.y) < -10 && (ChageCompass.y - OneCompass.y) > -18 &&
-                        (ChageCompass.z - OneCompass.z) < -20 && (ChageCompass.z - OneCompass.z) > -28)
+            else if ((ChageCompass.x - OneCompass.x) > 0 && (ChageCompass.x - OneCompass.x) < 10 &&
+                     (ChageCompass.y - OneCompass.y) < -8 && (ChageCompass.y - OneCompass.y) > -15 &&
+                      ChageCompass.z > ftiger)
             {
                 if (!audio.isPlaying)
                 {
-                    audio.clip = aud[2];
+                    audio.clip = aud[4];
                     audio.Play();
                 }
                 transform.position = new Vector3(15, 30, 0);
